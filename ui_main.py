@@ -1,3 +1,4 @@
+import os
 from nicegui import ui
 
 from app.services.task_registry import TASKS
@@ -63,4 +64,7 @@ show_task(
     content
 )
 
-ui.run()
+ui.run(
+    host='0.0.0.0',
+    port=int(os.environ.get('PORT', 8080))
+)
