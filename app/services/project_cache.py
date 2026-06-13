@@ -3,6 +3,8 @@ from nicegui import app
 import os
 
 MAX_HISTORY_ITEMS = int(os.getenv("MAX_HISTORY_ITEMS"))
+
+
 def get_project_cache():
 
     project_cache = app.storage.user.get(
@@ -47,12 +49,18 @@ def get_history(
         []
     )
 
+
 def delete_history_item(
     task_name,
     item
 ):
 
-    history = get_history(task_name)
+    project_cache = get_project_cache()
+
+    history = project_cache.get(
+        task_name,
+        []
+    )
 
     if item in history:
         history.remove(item)

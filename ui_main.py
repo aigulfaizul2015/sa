@@ -67,5 +67,8 @@ show_task(
 ui.run(
     host='0.0.0.0',
     port=int(os.environ.get('PORT', 8080)),
-    storage_secret=os.environ.get('STORAGE_SECRET', 'dev-secret')
+    storage_secret=os.environ.get(
+        'STORAGE_SECRET',
+        'dev-secret'
+    )
 )
