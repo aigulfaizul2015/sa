@@ -13,7 +13,6 @@ def load_prompt(task: str):
 
     prompt_path = PROMPTS_DIR / file_name
 
-    print("load_prompt")
 
     return prompt_path.read_text(encoding="utf-8")
 

@@ -29,7 +29,6 @@ def gpt(system_prompt: str, user_prompt: str):
             temperature=0.2
         )
 
-        print(resp)
         return resp.choices[0].message.content.strip()
 
     except Exception as e:

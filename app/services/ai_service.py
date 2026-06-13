@@ -35,7 +35,6 @@ def generate(
         provider=provider
     )
 
-    print("generate")
     return response
 
 

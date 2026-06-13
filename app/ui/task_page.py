@@ -77,7 +77,6 @@ def show_task(
                 acceptance_result = None
 
                 async def generate_result(): 
-                    print("generate_result")
                     # проверка на превышение симловов
                     for field in form_fields.values():
                         if not field.validate():
@@ -149,16 +148,12 @@ def show_task(
                         generator = generate_plantuml_diagram
                     elif result_type == "mermaid":
                         generator = generate_mermaid_diagram
-                        print(generator)
                     else:
                         generator = None
 
                     if generator:
                         diagram_data = generator(response)
                         svg = diagram_data.get("svgData")
-                        print("contains foreignObject:", "foreignObject" in svg)
-                        print("contains nodeLabel:", "nodeLabel" in svg)
-                        print("contains PAYMENT_METHODS:", "PAYMENT_METHODS" in svg)
 
                     # сохранение кэша
                     save_result(
