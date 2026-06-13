@@ -25,44 +25,48 @@ ui.add_css('''
 .task-result-markdown h4,
 .task-result-markdown h5,
 .task-result-markdown h6 { font-size: 0.9375rem; line-height: 1.35; margin: 0.5rem 0; }
-''')
-with ui.row().classes('w-full h-screen items-start no-wrap'):
+''', shared=True)
+@ui.page('/')
+def main():
 
-    with ui.column().classes(
-        'w-64 h-screen p-4 border-r no-wrap'
-    ).style(
-        'overflow-y: auto; flex-shrink: 0;'
-    ):
+    with ui.row().classes('w-full h-screen items-start no-wrap'):
 
-        for group_name, tasks in TASKS.items():
+        with ui.column().classes(
+            'w-64 h-screen p-4 border-r no-wrap'
+        ).style(
+            'overflow-y: auto; flex-shrink: 0;'
+        ):
 
-            ui.label(
-                group_name
-            ).classes(
-                'text-h6 mt-4'
-            )
+            for group_name, tasks in TASKS.items():
 
-            for task_name, task in tasks.items():
+                ui.label(
+                    group_name
+                ).classes(
+                    'text-h6 mt-4'
+                )
 
-                ui.button(
-                    task["title"],
-                    on_click=lambda t=task_name:
-                    show_task(
-                        t,
-                        content
-                    )
-                ).props('flat')
+                for task_name, task in tasks.items():
 
-    content = ui.column().classes(
-        'flex-grow h-screen p-6 items-stretch'
-    ).style(
-        'overflow-y: auto; min-height: 0;'
+                    ui.button(
+                        task["title"],
+                        on_click=lambda t=task_name:
+                        show_task(
+                            t,
+                            content
+                        )
+                    ).props('flat')
+
+        content = ui.column().classes(
+            'flex-grow h-screen p-6 items-stretch'
+        ).style(
+            'overflow-y: auto; min-height: 0;'
+        )
+
+    show_task(
+        "context",
+        content
     )
 
-show_task(
-    "context",
-    content
-)
 
 ui.run(
     host='0.0.0.0',

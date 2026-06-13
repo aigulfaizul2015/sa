@@ -18,7 +18,9 @@ from app.services.task_service import get_task
 from app.services.project_cache import (
     save_result,
     get_history,
-    delete_history_item
+    delete_history_item,
+    save_draft,
+    get_draft
 )
 from app.services.bitcit_service import (
     generate_plantuml_diagram,
@@ -72,6 +74,24 @@ def show_task(
                 )
 
                 form_fields = render_form(task)
+                # Заполнение формы из черновика
+                draft = get_draft(task_name)
+                for field_name, value in draft.items():
+                    if field_name in form_fields:
+                        form_fields[field_name].value = value
+                def save_current_draft():
+                    values = {}
+                    for field_name, field in form_fields.items():
+                        values[field_name] = field.value
+                    save_draft(
+                        task_name,
+                        values
+                    )
+                for field in form_fields.values():
+                    field.on(
+                        'blur',
+                        lambda e: save_current_draft()
+                    )
                 
                 check_button = None
                 quality_result = None
@@ -241,7 +261,7 @@ def show_task(
                             acceptance_result.visible = bool(cached_acceptance)
 
                     if history_options:
-                        MAX_HISTORY_ITEMS = int(os.getenv("MAX_HISTORY_ITEMS"))
+                        MAX_HISTORY_ITEMS = int(os.getenv("MAX_HISTORY_ITEMS", "5"))
                         history_select = ui.select(
                             options=history_options,
                             label=f'История (сохраняется макс. {MAX_HISTORY_ITEMS})',

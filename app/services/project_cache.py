@@ -2,7 +2,7 @@ from nicegui import app
 # Библиотека для работы с переменными
 import os
 
-MAX_HISTORY_ITEMS = int(os.getenv("MAX_HISTORY_ITEMS"))
+MAX_HISTORY_ITEMS = int(os.getenv("MAX_HISTORY_ITEMS", "5"))
 
 
 def get_project_cache():
@@ -64,3 +64,32 @@ def delete_history_item(
 
     if item in history:
         history.remove(item)
+
+
+def get_drafts():
+
+    drafts = app.storage.user.get(
+        'drafts'
+    )
+
+    if drafts is None:
+        drafts = {}
+        app.storage.user['drafts'] = drafts
+
+    return drafts
+
+
+def save_draft(task_name, values):
+
+    drafts = get_drafts()
+    drafts[task_name] = values
+
+
+def get_draft(task_name):
+
+    drafts = get_drafts()
+
+    return drafts.get(
+        task_name,
+        {}
+    )
