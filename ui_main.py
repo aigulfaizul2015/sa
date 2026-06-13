@@ -5,10 +5,6 @@ from app.services.task_registry import TASKS
 from app.ui.task_page import show_task
 
 ui.add_css('''
-.task-result-header {
-    min-height: 3.5rem;
-    flex-shrink: 0;
-}
 .task-result-panel {
     height: 40rem;
     min-height: 40rem;

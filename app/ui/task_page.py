@@ -4,7 +4,6 @@ from nicegui import ui
 # из-за проблем с блокировкой кнопки Сгенерировать, переход на асинхронную функцию
 from nicegui import run
 
-from app.services.task_registry import TASKS
 from app.ui.form_builder import render_form
 from app.services.context_builder import (
     build_context,
@@ -20,7 +19,8 @@ from app.services.project_cache import (
     get_history,
     delete_history_item,
     save_draft,
-    get_draft
+    get_draft,
+    MAX_HISTORY_ITEMS
 )
 from app.services.bitcit_service import (
     generate_plantuml_diagram,
@@ -261,7 +261,6 @@ def show_task(
                             acceptance_result.visible = bool(cached_acceptance)
 
                     if history_options:
-                        MAX_HISTORY_ITEMS = int(os.getenv("MAX_HISTORY_ITEMS", "5"))
                         history_select = ui.select(
                             options=history_options,
                             label=f'История (сохраняется макс. {MAX_HISTORY_ITEMS})',

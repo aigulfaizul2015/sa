@@ -53,7 +53,6 @@ TASKS = {
 
         "functional_requirements": {
             "title": "ФТ",
-            "prompt": "functional_requirements.md",
             "fields": [
                 "domain",
                 "logical_context_description",
@@ -70,7 +69,6 @@ TASKS = {
 
         "non_functional_requirements": {
             "title": "НФТ",
-            "prompt": "non_functional_requirements.md",
             "fields": [
                 "domain",
                 "logical_context_description",
@@ -91,11 +89,10 @@ TASKS = {
 
         "user_story": {
             "title": "User Story",
-            "prompt": "user_story.md",
             "fields": [
                 "domain",
                 "logical_context_description",
-                "business_requirements",
+                "functional_requirements",
                 "stakeholders"
             ],
             "required_fields": [
@@ -109,7 +106,6 @@ TASKS = {
 
         "use_case": {
             "title": "Use Case",
-            "prompt": "use_case.md",
             "fields": [
                 "domain",
                 "process_description",
@@ -130,7 +126,6 @@ TASKS = {
 
         "sequence_diagram": {
             "title": "Sequence диаграмма",
-            "prompt": "sequence_diagram.md",
             "fields": [
                 "use_case"
             ],
@@ -147,7 +142,6 @@ TASKS = {
 
         "logical_model_data": {
             "title": "Логическая модель",
-            "prompt": "logical_model_data.md",
             "fields": [
                 "domain",
                 "design_context"
@@ -162,7 +156,6 @@ TASKS = {
 
         "physical_model_data": {
             "title": "Физическая модель",
-            "prompt": "physical_model_data.md",
             "fields": [
                 "domain",
                 "design_context",
@@ -180,7 +173,6 @@ TASKS = {
 
         "indices": {
             "title": "Индексы",
-            "prompt": "indices.md",
             "fields": [
                 "domain",
                 "tables",
@@ -200,7 +192,6 @@ TASKS = {
 
         "er_diagram": {
             "title": "ER диаграмма",
-            "prompt": "er_diagram.md",
             "fields": [
                 "db_schema"
             ],
@@ -215,7 +206,6 @@ TASKS = {
     "Разработка": {
         "sql_script": {
             "title": "SQL скрипт",
-            "prompt": "sql_script.md",
             "fields": [
                 "db_type",
                 "db_schema"
@@ -230,7 +220,6 @@ TASKS = {
 
         "sql_script_mock_data": {
             "title": "SQL мок данные",
-            "prompt": "sql_script_mock_data.md",
             "fields": [
                 "db_type",
                 "db_schema",
@@ -247,7 +236,6 @@ TASKS = {
 
         "rest_api_list": {
             "title": "REST API список",
-            "prompt": "rest_api_list.md",
             "fields": [
                 "domain",
                 "service_name",
@@ -274,7 +262,6 @@ TASKS = {
 
         "rest_api_design": {
             "title": "REST API дизайн",
-            "prompt": "rest_api_design.md",
             "fields": [
                 "process_description",
                 "api_type",
