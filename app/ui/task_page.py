@@ -1,3 +1,4 @@
+import os
 # UI для отображения задачи, формы и результата
 from nicegui import ui
 # из-за проблем с блокировкой кнопки Сгенерировать, переход на асинхронную функцию
@@ -240,9 +241,10 @@ def show_task(
                             acceptance_result.visible = bool(cached_acceptance)
 
                     if history_options:
+                        MAX_HISTORY_ITEMS = int(os.getenv("MAX_HISTORY_ITEMS"))
                         history_select = ui.select(
                             options=history_options,
-                            label='История (сохраняется макс. 5)',
+                            label=f'История (сохраняется макс. {MAX_HISTORY_ITEMS})',
                             on_change=history_changed
                         ).classes('w-64')
 
