@@ -88,7 +88,7 @@ FIELDS = {
     "process_description": {
         "label": "Описание процесса / функции/ контекста",
         "placeholder": "Название и описание бизнес-процесса",
-        "max_length": 10000
+        "max_length": 15000
     },
 
     "architecture": {
@@ -112,13 +112,13 @@ FIELDS = {
     "use_case": {
         "label": "Use Case",
         "placeholder": "Полное описание Use Case",
-        "max_length": 10000
+        "max_length": 15000
     },
 
     "design_context": {
         "label": "Контекст",
         "placeholder": "Бизнес-требования, функциональные требования или Use Case",
-        "max_length": 10000
+        "max_length": 15000
     },
 
     "db_type": {
