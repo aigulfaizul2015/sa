@@ -16,7 +16,8 @@ from app.services.ai_service import (
 from app.services.task_service import get_task
 from app.services.project_cache import (
     save_result,
-    get_history
+    get_history,
+    delete_history_item
 )
 from app.services.bitcit_service import (
     generate_plantuml_diagram,
@@ -176,7 +177,7 @@ def show_task(
                             "claude": "Claude"
                         },
                         value="openai",
-                        label="Модель"
+                        label="Провайдер"
                     ).classes(
                         'w-40'
                     )
@@ -241,9 +242,31 @@ def show_task(
                     if history_options:
                         history_select = ui.select(
                             options=history_options,
-                            label='История',
+                            label='История (сохраняется макс. 5)',
                             on_change=history_changed
                         ).classes('w-64')
+
+                        def delete_selected_history():
+                            if selected_item:
+                                delete_history_item(
+                                    task_name,
+                                    selected_item
+                                )
+                                ui.notify(
+                                    'Запрос удалён',
+                                    type='positive'
+                                )
+                                show_task(
+                                    task_name,
+                                    content
+                                )
+
+                        ui.button(
+                            icon='delete',
+                            on_click=delete_selected_history
+                        ).props(
+                            'flat round'
+                        )
                 
                 diagram = None
 

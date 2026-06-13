@@ -1,4 +1,20 @@
-PROJECT_CACHE = {}
+from nicegui import app
+# Библиотека для работы с переменными
+import os
+
+MAX_HISTORY_ITEMS = int(os.getenv("MAX_HISTORY_ITEMS"))
+def get_project_cache():
+
+    project_cache = app.storage.user.get(
+        'project_cache'
+    )
+
+    if project_cache is None:
+        project_cache = {}
+        app.storage.user['project_cache'] = project_cache
+
+    return project_cache
+
 
 def save_result(
     task_name,
@@ -7,22 +23,36 @@ def save_result(
     svg=None
 ):
 
-    if task_name not in PROJECT_CACHE:
+    project_cache = get_project_cache()
 
-        PROJECT_CACHE[task_name] = []
+    if task_name not in project_cache:
+        project_cache[task_name] = []
 
-    PROJECT_CACHE[task_name].append({
+    project_cache[task_name].append({
         "request": request,
         "response": response,
         "svg": svg
     })
+    project_cache[task_name] = project_cache[task_name][-MAX_HISTORY_ITEMS:]
 
 
 def get_history(
     task_name
 ):
 
-    return PROJECT_CACHE.get(
+    project_cache = get_project_cache()
+
+    return project_cache.get(
         task_name,
-        [] # если раздела нет, вернуть пустой массив
+        []
     )
+
+def delete_history_item(
+    task_name,
+    item
+):
+
+    history = get_history(task_name)
+
+    if item in history:
+        history.remove(item)
