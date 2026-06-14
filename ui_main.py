@@ -1,8 +1,9 @@
 import os
-from nicegui import ui
+from nicegui import ui, app
 
 from app.services.task_registry import TASKS
 from app.ui.task_page import show_task
+
 
 ui.add_css('''
 .task-result-panel {
@@ -22,8 +23,44 @@ ui.add_css('''
 .task-result-markdown h5,
 .task-result-markdown h6 { font-size: 0.9375rem; line-height: 1.35; margin: 0.5rem 0; }
 ''', shared=True)
+
+
+
 @ui.page('/')
+
 def main():
+
+    ACCESS_CODE = os.getenv("ACCESS_CODE", "")
+
+    if not app.storage.user.get("authorized"):
+
+        code_input = ui.input(
+            label="Код доступа"
+        ).props(
+            "type=password"
+        )
+
+        def login():
+
+            if code_input.value == ACCESS_CODE:
+
+                app.storage.user["authorized"] = True
+
+                ui.navigate.reload()
+
+            else:
+
+                ui.notify(
+                    "Неверный код",
+                    type="negative"
+                )
+
+        ui.button(
+            "Войти",
+            on_click=login
+        )
+
+        return
 
     with ui.row().classes('w-full h-screen items-start no-wrap'):
 
