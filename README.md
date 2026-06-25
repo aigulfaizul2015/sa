@@ -62,7 +62,9 @@ ACCESS_CODE=ваш_код_доступа
 STORAGE_SECRET=секретный_ключ
 MAX_HISTORY_ITEMS =максимальное кол-во записей в истории
 GPT_API_KEY =ключ OpenAi
+GPT_MODEL =модель OpenAi
 CLAUDE_API_KEY =ключ Claude
+CLAUDE_MODEL =модель Claude
 ```
 
 ## Запуск
