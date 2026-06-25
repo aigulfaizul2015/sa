@@ -135,7 +135,7 @@ FIELDS = {
     "db_schema": {
         "label": "Схема БД",
         "placeholder": "Описание схемы базы данных",
-        "max_length": 2000
+        "max_length": 15000
     },
 
     "tables": {
